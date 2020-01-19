@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<% if(data.LRClientCss){ %><link href="<%=data.LRClientCss%>" rel="stylesheet" /><% } %>
+    <title>Linux Remote</title>
+  </head>
+  <body>
+  <div id="lr-app">Loading...</div>
+  <% if(data.serverCORS){ %>
+    <h1>linux-remote-server</h1>
+    <div>Configured <b>CORS</b> is true. So client not included.<div>
+    <div>CORS Allow-Origin: <b>${data.serverCORS}</b><div>
+    <div>You can install <a href="https://github.com/linux-remote/client">client</a> to connect.</div>
+  <%} else { %>
+  <script>
+    var CLIENT_CONFIG = <%-JSON.stringify(data.CLIENT_CONFIG)%>
+  </script>
+  <%data.loadJsArr.forEach(function(src){ %>
+  <script src="<%=src%>"></script><% }); %>
+  <script>
+    window.require.config({
+      paths: <%-JSON.stringify(data.requirePaths)%>
+    });
+  </script>
+  <% } %>
+</body>
+</html>

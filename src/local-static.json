@@ -1,0 +1,16 @@
+{
+ "require": "/public/js/require-{{VERSION}}.min.js",
+ "jquery": "/nodeMouduleStatic/jquery{{VERSION}}/jquery.min.js",
+ "vueRuntime": "/nodeMouduleStatic/vue{{VERSION}}/vue.runtime.min.js",
+ "vuex": "/nodeMouduleStatic/vuex{{VERSION}}/vuex.min.js",
+ "vueRouter": "/nodeMouduleStatic/vue-router{{VERSION}}/vue-router.js",
+ "pako": "/nodeMouduleStatic/pako{{VERSION}}/pako.min.js",
+ "xterm": "/public/xterm/{{VERSION}}/xterm.min.js",
+ "xtermCss": "/public/xterm/{{VERSION}}/xterm.min.js",
+ "xtermAttach": "/public/xterm/{{VERSION}}/addons/attach/attach.min.js",
+ "xtermFit": "/public/xterm/{{VERSION}}/addons/fit/fit.min.js",
+ "xtermWebLinks": "/public/xterm/{{VERSION}}/addons/webLinks/webLinks.min.js",
+
+ "LRClientPages": null,
+ "LRIconUrl": "/public/icon/"
+}
