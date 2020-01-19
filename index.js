@@ -52,9 +52,27 @@ function isLocalPublic(cdn){
   }
   return false;
 }
+
+// express mid
+function indexMid(clientConf, serverCORS){
+  let indexCache;
+  return function(req, res, next){
+    if(indexCache){
+      return res.type('html').send(indexCache);
+    }
+    clientIndex(clientConf, serverCORS, function(err, html){
+      if(err){
+        return next(err);
+      }
+      indexCache = html;
+      res.type('html').send(indexCache);
+    })
+  }
+}
 module.exports = {
   clientIndex,
   isLocalClient,
   isLocalIcon,
-  isLocalPublic
+  isLocalPublic,
+  indexMid
 };
