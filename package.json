@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/linux-remote/client-index#readme",
   "dependencies": {
-    "ejs": "^3.0.1"
+    "ejs": "^3.0.1",
+    "http-proxy": "^1.18.0"
   }
 }

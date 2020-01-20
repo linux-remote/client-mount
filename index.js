@@ -1,7 +1,15 @@
-// ['jquery', 'vue.runtime', 'vuex', 'vue-router', 'require', 'lrCl']
+/*
+  Browser CORS status: 
+  A cookie associated with a cross-site resource at http://localhost/ was set without the `SameSite` attribute. A future release of Chrome will only deliver cookies with cross-site requests if they are set with `SameSite=None` and `Secure`. You can review cookies in developer tools under Application>Storage>Cookies and see more details at https://www.chromestatus.com/feature/5088147346030592 and https://www.chromestatus.com/feature/5633521622188032. cookies-without-same-site-must-be-secure
+  So use reverse proxy.
+
+  https://unpkg.com/ Sync of npm.
+  https://cdnjs.com/ Version is may lag behind.
+*/
 const ejs = require('ejs');
 const fs = require('fs');
 const path = require('path');
+const httpProxy = require('http-proxy');
 const { parse } = require('./src/parse');
 
 function clientIndex(clientConf, serverCORS, callback){
