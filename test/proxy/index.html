@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>linux-remote</title>
+<meta charset="utf-8">
+<meta name="description" content="linux-remote - A Webside Remote Desktop of Linux">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+  <h2>ajax out:</h2>
+<pre id="ajax_out" style="height: 200px;">
+
+</pre>
+<h2>ws out:</h2>
+<pre id="ws_out">
+
+</pre>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$.get('/api/data', function(data){
+  $('#ajax_out').text(data);
+})
+const host = ''
+const ws = new WebSocket('ws://' + location.host);
+ws.onopen = function(){
+  ws.send('hello');
+}
+
+ws.onmessage = function(res){
+  $('#ws_out').text(res.data);
+};
+</script>
+</body>
+</html>

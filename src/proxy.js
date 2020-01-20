@@ -18,7 +18,9 @@ function createProxy(conf){
   const proxy = httpProxy.createServer(opt);
 
   proxy.on('proxyReq', cookieFilter);
-  proxy.on('proxyReqWs', cookieFilter);
+  proxy.on('proxyReqWs', function(){
+    console.log('proxyReqWs');
+  });
 
   return proxy;
 };

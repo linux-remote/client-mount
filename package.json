@@ -19,5 +19,8 @@
   "dependencies": {
     "ejs": "^3.0.1",
     "http-proxy": "^1.18.0"
+  },
+  "devDependencies": {
+    "ws": "^7.2.1"
   }
 }
