@@ -3,7 +3,7 @@
   A cookie associated with a cross-site resource at http://localhost/ was set without the `SameSite` attribute. A future release of Chrome will only deliver cookies with cross-site requests if they are set with `SameSite=None` and `Secure`. You can review cookies in developer tools under Application>Storage>Cookies and see more details at https://www.chromestatus.com/feature/5088147346030592 and https://www.chromestatus.com/feature/5633521622188032. cookies-without-same-site-must-be-secure
   So use proxy.
 */
-
+const fs = require('fs');
 const httpProxy = require('http-proxy');
 const SID_MARK = 'lr_sid=';
 
@@ -12,7 +12,11 @@ function createProxy(conf){
     target: conf.target,
   };
   if(conf.secure){
-    opt.ssl = conf.secure
+    if(conf.secure.caPath){
+      conf.secure.ca = fs.readFileSync(conf.secure.caPath, 'utf-8');
+      delete(conf.secure.caPath);
+    }
+    opt.ssl = conf.secure;
   }
 
   const proxy = httpProxy.createServer(opt);

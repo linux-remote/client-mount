@@ -6,81 +6,55 @@
   https://unpkg.com/ Sync of npm.
   https://cdnjs.com/ Version is may lag behind.
 */
-const ejs = require('ejs');
-const fs = require('fs');
-const path = require('path');
-const httpProxy = require('http-proxy');
-const { parse } = require('./src/parse');
 
-function clientIndex(clientConf, serverCORS, callback){
-  let ejsOptions = Object.create(null);
-  clientConf.cdn = clientConf.cdn || Object.create(null);
-  if(serverCORS){
-    ejsOptions.data = {
-      serverCORS
-    }
-    _render(ejsOptions, callback);
-    return;
-  }
+const { localUnpkgPrefix } = require('./src/constant');
+const {getIndex, getStaticMap} = require('./src/get-index');
+const createProxy = require('./src/proxy');
 
-  parse(clientConf, function(err, data){
-    if(err){
-      return callback(err);
-    }
-    ejsOptions.data = data;
-    _render(ejsOptions, function(err, html){
-      if(err){
-        return callback(err);
-      }
-      callback(null, html);
-    })
+function mount(app, conf){
+
+  // mount index;
+  let indexHtml = getIndex(conf);
+  app.get('/', function(req, res){
+    res.type('html').end(indexHtml);
   });
-}
 
-function _render(ejsOptions, callback){
-  fs.readFile(path.join(__dirname, 'src/index.ejs'), 'utf-8', function(err, tpl){
-    if(err){
-      return callback(err);
-    }
-    callback(null, ejs.render(tpl, ejsOptions))
+  // mount proxy;
+  const proxy = createProxy({
+    target: conf.target
   });
-}
-function isLocalClient(cdn){
-  return cdn.LRClientPages === undefined;
-}
-function isLocalIcon(cdn){
-  return cdn.LRIconUrl === undefined;
-}
-function isLocalPublic(cdn){
-  let i = 0, arr = Object.create(cdn), len = arr.length;
-  for(; i < len; i++){
-    if(cdn[arr[i]].indexOf('/public/') === 0){
-      return true;
+  app.use(function(req, res, next){
+    // WTF of: express rewrite req.url.
+    if(req.url.indexOf('/api') === 0){
+      proxy.web(req, res);
+    } else {
+      next();
     }
+  });
+
+  // mount static;
+  const isLocal = (conf.host === 'localhost') || (conf.host === '127.0.0.1');
+  const maxAge = isLocal ? 0 : 1000 * 60 * 60 * 24 * 365;
+  const staticMap = getStaticMap();
+  if(Object.keys(staticMap).length){
+    app.use(localUnpkgPrefix, function(req, res, next){
+      if(req.method !== 'GET'){
+        return next({status: 405});
+      }
+      const filePath = staticMap[req.url];
+      if(filePath){
+        res.sendFile(filePath, {
+          maxAge
+        });
+      }
+    });
   }
-  return false;
+
+  return function(server){
+    server.on('upgrade', function(req, socket, head){
+      proxy.ws(req, socket, head);
+    });
+  };
 }
 
-// express mid
-function indexMid(clientConf, serverCORS){
-  let indexCache;
-  return function(req, res, next){
-    if(indexCache){
-      return res.type('html').send(indexCache);
-    }
-    clientIndex(clientConf, serverCORS, function(err, html){
-      if(err){
-        return next(err);
-      }
-      indexCache = html;
-      res.type('html').send(indexCache);
-    })
-  }
-}
-module.exports = {
-  clientIndex,
-  isLocalClient,
-  isLocalIcon,
-  isLocalPublic,
-  indexMid
-};
+module.exports = mount;
