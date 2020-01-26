@@ -36,7 +36,7 @@ function cookieFilter(proxyReq, req){
   proxyReq.setHeader('Cookie', sidCookie);
 }
 
-function _getSidCookie(cookie){
+function _getSidCookie(cookie = ''){
   let i = cookie.indexOf(SID_MARK);
   if(i === -1){
     return [];
