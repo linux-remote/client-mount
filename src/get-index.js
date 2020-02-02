@@ -3,7 +3,7 @@ const fs = require('fs');
 
 const ejs = require('ejs');
 const {localUnpkgMap, wrapDistedUrl, getFilePathByUrl} = require('../../local-unpkg/index.js');
-const { localUnpkgPrefix } = require('./constant');
+const { localUnpkgPrefix } = require('./constant.js');
 
 const indexTpl = fs.readFileSync(path.join(__dirname, 'index.ejs'), 'utf-8');
 const DEF_CDN_DOMAIN = 'https://unpkg.com';
@@ -18,6 +18,7 @@ function parse(conf){
     lrClientCss = clientMap.lrClientCss.url;
   } else {
     lrClientJs = conf._dev;
+    conf._clientVersion = 'dev';
   }
 
   let cdn = conf.cdn;
@@ -74,7 +75,8 @@ function parse(conf){
   });
 
   const CLIENT_CONFIG = {
-    VERSION: conf._clientVersion
+    VERSION: conf._clientVersion,
+    CORS: conf.CORS
   }
   return {
     lrClientCss,

@@ -7,9 +7,8 @@
   https://cdnjs.com/ Version is may lag behind.
 */
 
-const { localUnpkgPrefix } = require('./src/constant');
-const {getIndex, getStaticMap} = require('./src/get-index');
-const createProxy = require('./src/proxy');
+const { localUnpkgPrefix } = require('./src/constant.js');
+const {getIndex, getStaticMap} = require('./src/get-index.js');
 
 function mount(app, conf){
 
@@ -17,19 +16,6 @@ function mount(app, conf){
   let indexHtml = getIndex(conf);
   app.get('/', function(req, res){
     res.type('html').end(indexHtml);
-  });
-
-  // mount proxy;
-  const proxy = createProxy({
-    target: conf.target
-  });
-  app.use(function(req, res, next){
-    // WTF of: express rewrite req.url.
-    if(req.url.indexOf('/api') === 0){
-      proxy.web(req, res);
-    } else {
-      next();
-    }
   });
 
   // mount static;
@@ -49,12 +35,6 @@ function mount(app, conf){
       }
     });
   }
-
-  return function(server){
-    server.on('upgrade', function(req, socket, head){
-      proxy.ws(req, socket, head);
-    });
-  };
 }
 
 module.exports = mount;

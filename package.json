@@ -22,10 +22,7 @@
   "homepage": "https://github.com/linux-remote/client-index#readme",
   "dependencies": {
     "@linux-remote/local-unpkg": "^0.0.1",
-    "ejs": "^3.0.1",
-    "http-proxy": "^1.18.0"
+    "ejs": "^3.0.1"
   },
-  "devDependencies": {
-    "ws": "^7.2.1"
-  }
+  "devDependencies": {}
 }
