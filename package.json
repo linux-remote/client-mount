@@ -1,6 +1,6 @@
 {
-  "name": "@linux-remote/client-mount",
-  "version": "0.0.1",
+  "name": "@linux-remote/client-index",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {

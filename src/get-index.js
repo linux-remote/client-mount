@@ -8,6 +8,7 @@ const { localUnpkgPrefix } = require('./constant.js');
 const indexTpl = fs.readFileSync(path.join(__dirname, 'index.ejs'), 'utf-8');
 const DEF_CDN_DOMAIN = 'https://unpkg.com';
 let prefixUrl = localUnpkgPrefix;
+const OPEN_ICON = localUnpkgMap['@linux-remote/open-icon'];
 
 function parse(conf){
   let lrClientJs, lrClientCss;
@@ -74,9 +75,11 @@ function parse(conf){
     requirePaths[k] = map[k];
   });
 
+  
   const CLIENT_CONFIG = {
     VERSION: conf._clientVersion,
-    CORS: conf.CORS
+    CORS: conf.CORS,
+    OPEN_ICON_URL: OPEN_ICON.url
   }
   return {
     lrClientCss,
@@ -122,5 +125,6 @@ function getStaticMap(){
 
 module.exports = {
   getIndex,
-  getStaticMap
+  getStaticMap,
+  OPEN_ICON
 };
