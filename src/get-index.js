@@ -79,7 +79,7 @@ function parse(conf){
   const CLIENT_CONFIG = {
     VERSION: conf._clientVersion,
     CORS: conf.CORS,
-    OPEN_ICON_URL: OPEN_ICON.url
+    OPEN_ICON_URL: map['@linux-remote/open-icon']
   }
   return {
     lrClientCss,
