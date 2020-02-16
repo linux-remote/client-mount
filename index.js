@@ -10,7 +10,15 @@ function mount(app, conf){
 
   // mount index;
   let indexHtml = getIndex(conf);
+  let indexEtag = `W/"${conf._clientVersion}"`;
   app.get('/', function(req, res){
+    if(req.get('If-None-Match') === indexEtag){
+      res.status(304).end();
+      return;
+    }
+    res.set('ETag', indexEtag);
+    res.set('Cache-control', 'public, max-age=0');
+    res.set('X-Frame-Options', 'deny');
     res.type('html').end(indexHtml);
   });
 
