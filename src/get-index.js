@@ -5,7 +5,7 @@ const ejs = require('ejs');
 const {localUnpkgMap, wrapDistedUrl, getFilePathByUrl} = require('../../local-unpkg/index.js');
 const { localUnpkgPrefix } = require('./constant.js');
 
-const indexTpl = fs.readFileSync(path.join(__dirname, 'index.ejs'), 'utf-8');
+let indexTpl;
 const DEF_CDN_DOMAIN = 'https://unpkg.com';
 let prefixUrl = localUnpkgPrefix;
 const OPEN_ICON = localUnpkgMap['@linux-remote/open-icon'];
@@ -108,6 +108,9 @@ function _getClientMap(conf){
 
 function getIndex(conf){
   const data = parse(conf);
+  if(!indexTpl){
+    indexTpl = fs.readFileSync(conf.indexTplPath, 'utf-8');
+  }
   return ejs.render(indexTpl, {data});
 }
 
