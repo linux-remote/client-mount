@@ -19,7 +19,7 @@ function parse(conf){
     lrClientCss = clientMap.lrClientCss.url;
   } else {
     lrClientJs = conf._dev;
-    conf._clientVersion = 'dev';
+    conf._clientVersion = 'dev_' + Date.now();
   }
 
   let cdn = conf.cdn;
