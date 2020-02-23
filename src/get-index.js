@@ -72,7 +72,8 @@ function parse(conf){
   'xterm-addon-web-links', 
   'xterm-addon-attach', 
   'xterm.css'].forEach(k => {
-    requirePaths[k] = map[k];
+    // Requirejs(amd) will fucking auto add .js suffix and unable to stop.
+    requirePaths[k] = map[k].replace(/\.js$/, '');
   });
 
   
