@@ -58,12 +58,12 @@ function parse(conf){
 
   const loadJsArr = [];
 
-  ['jquery', 'vue.runtime', 'vuex', 'vue-router', 'requirejs'].forEach(k => {
+  ['jquery', 'vue.runtime', 'vuex', 'vue-router', 'amd'].forEach(k => {
     loadJsArr.push(map[k]);
   });
   
 
-  loadJsArr.push(lrClientJs);
+  // loadJsArr.push(lrClientJs);
 
   const requirePaths = Object.create(null);
   ['pako', 
@@ -73,7 +73,8 @@ function parse(conf){
   'xterm-addon-attach', 
   'xterm.css'].forEach(k => {
     // Requirejs(amd) will fucking auto add .js suffix and unable to stop.
-    requirePaths[k] = map[k].replace(/\.js$/, '');
+    // .replace(/\.js$/, '');
+    requirePaths[k] = map[k];
   });
 
   
@@ -85,8 +86,9 @@ function parse(conf){
   return {
     lrClientCss,
     loadJsArr,
-    requirePaths,
-    CLIENT_CONFIG
+    CLIENT_CONFIG,
+    lrClientJs,
+    amdMap: requirePaths
   }
 }
 
