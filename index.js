@@ -11,7 +11,7 @@ function mount(app, conf){
   // mount index;
   let indexHtml = getIndex(conf);
   let indexEtag = `W/"${conf._clientVersion}"`;
-  app.get('/', function(req, res){
+  app.get(/^\/($|user)/, function(req, res){
     if(req.get('If-None-Match') === indexEtag){
       res.status(304).end();
       return;

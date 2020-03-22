@@ -124,6 +124,9 @@ function getStaticMap(){
     v = localUnpkgMap[k];
     if(!v.cdn){
       staticMap[v.url] = getFilePathByUrl(v.url);
+      // if(k === 'amd'){
+      //   staticMap[v.url] = path.join(__dirname, '../../../amd/src/amd.js');
+      // }
     }
   });
   return staticMap;
