@@ -5,7 +5,7 @@
 
 const { localUnpkgPrefix } = require('./src/constant.js');
 const {getIndex, getStaticMap, OPEN_ICON} = require('./src/get-index.js');
-
+const isPro = process.env.NODE_ENV === 'production';
 function mount(app, conf){
 
   // mount index;
@@ -23,14 +23,14 @@ function mount(app, conf){
   });
 
   // mount static;
-  const isLocal = (conf.host === 'localhost') || (conf.host === '127.0.0.1');
-  const maxAge = isLocal ? 0 : 1000 * 60 * 60 * 24 * 365;
+  // const isLocal = (conf.host === 'localhost') || (conf.host === '127.0.0.1');
+  const maxAge = isPro ? 1000 * 60 * 60 * 24 * 365  : 0;
   const staticMap = getStaticMap();
   
   if(!OPEN_ICON.cdn){
     const openIconFilePath = staticMap[OPEN_ICON.url];
     delete(staticMap[OPEN_ICON.url]);
-    // console.log('OPEN_ICON', OPEN_ICON, openIconFilePath);
+    console.log('OPEN_ICON', OPEN_ICON, openIconFilePath);
     app.use(localUnpkgPrefix + OPEN_ICON.url, conf.eStatic(openIconFilePath, {
       maxAge
     }));
@@ -46,6 +46,8 @@ function mount(app, conf){
         res.sendFile(filePath, {
           maxAge
         });
+      } else {
+        next();
       }
     });
   }
