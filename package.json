@@ -1,5 +1,5 @@
 {
-  "name": "@linux-remote/client-index",
+  "name": "@linux-remote/client-mount",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -15,7 +15,7 @@
     "url": "git+https://github.com/linux-remote/client-index.git"
   },
   "author": "",
-  "license": "MIT",
+  "license": "MPL",
   "bugs": {
     "url": "https://github.com/linux-remote/client-index/issues"
   },
