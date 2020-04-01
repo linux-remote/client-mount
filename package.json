@@ -15,7 +15,7 @@
     "url": "git+https://github.com/linux-remote/client-index.git"
   },
   "author": "",
-  "license": "MPL",
+  "license": "MPL-2.0",
   "bugs": {
     "url": "https://github.com/linux-remote/client-index/issues"
   },
