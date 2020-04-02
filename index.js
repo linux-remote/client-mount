@@ -165,6 +165,7 @@ function _formatPkgMap(opt, pkgMap, prefixUrl){
     loadJsArr,
     lrClientJs,
     lrClientCss,
+    prefixUrl,
     OPEN_ICON_URL: prefixUrl + pkgMap[OPEN_ICON_PKG_NAME].url
   }
 }

@@ -17,6 +17,7 @@ function parse(opt, indexData){
   return {
     lrClientCss: indexData.lrClientCss,
     CLIENT_CONFIG,
+    prefixUrl: indexData.prefixUrl,
     lrClientJs: indexData.lrClientJs,
     loadJsArr: indexData.loadJsArr,
     amdMap: indexData.amdMap
