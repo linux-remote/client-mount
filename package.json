@@ -1,7 +1,7 @@
 {
   "name": "@linux-remote/client-mount",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "server mount client",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,14 +14,13 @@
     "type": "git",
     "url": "git+https://github.com/linux-remote/client-index.git"
   },
-  "author": "",
+  "author": "Du Wei <hezedu@hotmail.com>",
   "license": "MPL-2.0",
   "bugs": {
     "url": "https://github.com/linux-remote/client-index/issues"
   },
   "homepage": "https://github.com/linux-remote/client-index#readme",
   "dependencies": {
-    "@linux-remote/local-unpkg": "^0.0.1",
     "ejs": "^3.0.1"
   },
   "devDependencies": {}

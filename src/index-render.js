@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 const ejs = require('ejs');
-const { OPEN_ICON_PKG_NAME } = require('./constant.js');
 
 // opt: {cdn, CORS, clientVerison}
 
