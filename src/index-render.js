@@ -1,6 +1,4 @@
-const fs = require('fs');
-const path = require('path');
-const ejs = require('ejs');
+const jsTplManualEngine = require('./js-tpl-manual-engine.js');
 
 // opt: {cdn, CORS, clientVerison}
 
@@ -27,8 +25,7 @@ function parse(opt, indexData){
 
 function render(opt, indexData){
   const data = parse(opt, indexData);
-  const indexTpl = fs.readFileSync(path.join(__dirname, 'index.ejs'), 'utf-8');
-  return ejs.render(indexTpl, {data});
+  return jsTplManualEngine(data);
 }
 
 module.exports = render;

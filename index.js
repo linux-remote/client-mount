@@ -92,7 +92,7 @@ function _indexHandler(opt, indexData){
       return;
     }
     res.set('ETag', indexEtag);
-    res.set('Cache-control', 'public, max-age=0');
+    res.set('Cache-Control', 'public, max-age=0');
     res.set('X-Frame-Options', 'deny');
     res.type('html').end(indexHtmlChche);
   }
