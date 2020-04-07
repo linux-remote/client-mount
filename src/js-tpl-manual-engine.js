@@ -7,7 +7,7 @@ return `<!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    ` + (!data.lrClientCss ? '' : `<link href="${data.prefixUrl}${data.lrClientCss}" rel="stylesheet" />`) + `
+    ` + (!data.lrClientCss ? '' : `<link href="${data.lrClientCss}" rel="stylesheet" />`) + `
     <title>Linux Remote</title>
   </head>
   <body>
@@ -19,7 +19,7 @@ return `<!DOCTYPE html>
     var CLIENT_CONFIG = ${JSON.stringify(data.CLIENT_CONFIG)};
     window.require.setMap(${JSON.stringify(data.amdMap)});
     </script>
-    <script src="${data.prefixUrl}${data.lrClientJs}"></script>
+    <script src="${data.lrClientJs}"></script>
   </body>
 </html>`;
 }

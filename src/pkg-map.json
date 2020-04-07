@@ -1,5 +1,5 @@
 {
-  "_self": "0.0.2",
+  "_self": "0.0.3",
   "jquery": {
     "url": "/jquery@3.4.1/dist/jquery",
     "version": "3.4.1",
@@ -53,8 +53,8 @@
     "version": "4.3.0"
   },
   "@linux-remote/open-icon": {
-    "url": "/@linux-remote/open-icon@1.0.0/icons/",
-    "version": "1.0.0",
+    "url": "/@linux-remote/open-icon@1.0.3/icons/",
+    "version": "1.0.3",
     "type": "dir"
   }
 }

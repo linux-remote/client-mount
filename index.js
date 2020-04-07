@@ -38,6 +38,7 @@ function mount(app, eStatic, opt){
     const maxAge = global.IS_PRO ? 1000 * 60 * 60 * 24 * 365 : 0;
     let dirArr = [], filePkgMap = Object.create(null);
     let pkgItem;
+
     Object.keys(pkgMap).forEach(k => {
       pkgItem = pkgMap[k];
       let filePath =  pkgItem.url.replace('@' + pkgItem.version, '');
@@ -49,6 +50,18 @@ function mount(app, eStatic, opt){
         filePkgMap[pkgItem.url] = pkgItem.filePath;
       }
     });
+
+    if(opt._devFilePkgMask){ // dev mask
+      Object.keys(opt._devFilePkgMask).forEach(k => {
+        let _item = pkgMap[k];
+        if(_item){
+          Object.assign(_item, opt._devFilePkgMask[k]);
+          if(filePkgMap[_item.url]){
+            filePkgMap[_item.url] = _item.filePath;
+          }
+        }
+      });
+    }
 
     app.use(localUnpkgPrefix, function(req, res, next){
       if(req.method !== 'GET'){
@@ -65,9 +78,6 @@ function mount(app, eStatic, opt){
     });
 
     dirArr.forEach(item => {
-      console.log('\n\nlocalUnpkgPrefix + item.url', localUnpkgPrefix + item.url);
-      console.log('item.filePath', item.filePath);
-      console.log('\n\n')
       app.use(localUnpkgPrefix + item.url, eStatic(item.filePath, {
         maxAge
       }));
@@ -155,8 +165,8 @@ function _formatPkgMap(opt, pkgMap, prefixUrl){
   if(global.IS_PRO){
     const clientMap = _genClientMap(opt.clientVersion);
     Object.assign(pkgMap, clientMap);
-    lrClientJs = pkgMap.lrClientJs.url;
-    lrClientCss = pkgMap.lrClientCss.url;
+    lrClientJs = prefixUrl + pkgMap.lrClientJs.url;
+    lrClientCss = prefixUrl + pkgMap.lrClientCss.url;
   } else {
     lrClientJs = opt._devlrClientJs;
   }
