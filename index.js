@@ -3,7 +3,14 @@
   https://cdnjs.com/ Version is may lag behind.
 */
 const path = require('path');
-const { localUnpkgPrefix, DEF_CDN_DOMAIN, CLIENT_PKG_NAME, OPEN_ICON_PKG_NAME } = require('./src/constant.js');
+
+const { localUnpkgPrefix, 
+  DEF_CDN_DOMAIN, 
+  CLIENT_PKG_NAME, 
+  OPEN_ICON_PKG_NAME } = require('./src/constant.js');
+
+const parseMap = require('./src/parse-map.js');
+const {wrapDistedUrl} = require('./src/util.js');
 const indexRender = require('./src/index-render.js');
 
 global.IS_PRO = process.env.NODE_ENV === 'production';
@@ -13,7 +20,7 @@ global.IS_PRO = process.env.NODE_ENV === 'production';
         clientVersion, 
         CORS, 
         localunpkgdir?, 
-        localunpkgVersion?,
+        localunpkgVersion?, X
          _devlrClientJs?
       }
 */
@@ -21,13 +28,14 @@ let indexHtmlChche;
 
 function mount(app, eStatic, opt){
   // mount index;
-  let pkgMap = require('./src/pkg-map.json');
+  let pkgMap = require('./static-map.json');
+  pkgMap = parseMap(pkgMap);
   let prefixUrl;
 
   if(opt.cdn){
     prefixUrl = DEF_CDN_DOMAIN;
   } else {
-    _checkLocalUnpkg(opt, pkgMap._self);
+    _checkLocalUnpkg(opt);
     prefixUrl = localUnpkgPrefix;
   }
 
@@ -112,27 +120,27 @@ function _indexHandler(opt, indexData){
 function _genClientMap(clientVersion){
   return {
     lrClientCss: {
-      url: _wrapDistedUrl(CLIENT_PKG_NAME, clientVersion, 'lr-client.min.css'),
+      url: wrapDistedUrl(CLIENT_PKG_NAME, clientVersion, 'lr-client.min.css'),
       version: clientVersion
     },
     lrClientJs: {
-      url: _wrapDistedUrl(CLIENT_PKG_NAME, clientVersion, 'lr-client.min.js'),
+      url: wrapDistedUrl(CLIENT_PKG_NAME, clientVersion, 'lr-client.min.js'),
       version: clientVersion
     }
   }
 }
 
-function _checkLocalUnpkg(opt, localUnpkgVersion){
+function _checkLocalUnpkg(opt /*, localUnpkgVersion */){
   if(!opt.localunpkgdir){
     throw new Error('not have localunpkgdir');
   }
-  if(opt.localunpkgVersion !== localUnpkgVersion){
-    throw new Error('client-index localunpkg version ' + localUnpkgVersion + ' is Unmatched: ' + opt.localunpkgVersion);
-  }
+  // if(opt.localunpkgVersion !== localUnpkgVersion){
+  //   throw new Error('client-index localunpkg version ' + localUnpkgVersion + ' is Unmatched: ' + opt.localunpkgVersion);
+  // }
 }
 
 function _formatPkgMap(opt, pkgMap, prefixUrl){
-  delete(pkgMap._self);
+  // delete(pkgMap._2self);
   const loadJsArr = [],
   amdMap = Object.create(null);
   let item, isJs
@@ -178,10 +186,6 @@ function _formatPkgMap(opt, pkgMap, prefixUrl){
     prefixUrl,
     OPEN_ICON_URL: prefixUrl + pkgMap[OPEN_ICON_PKG_NAME].url
   }
-}
-
-function _wrapDistedUrl(mName, version, fileName){
-  return `/${mName}@${version}/dist/${fileName}`;
 }
 
 module.exports = mount;

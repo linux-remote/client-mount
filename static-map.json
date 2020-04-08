@@ -1,0 +1,11 @@
+{
+  "amd": "0.0.2",
+  "pako": "1.0.10",
+  "vuex": "3.0.1",
+  "vue.runtime": "2.6.11",
+  "vue-router": "3.0.1",
+  "jquery": "3.4.1",
+  "xterm": "4.3.0",
+  "xterm-addon-fit": "0.3.0",
+  "open-icon": "1.0.3"
+}
