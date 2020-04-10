@@ -19,8 +19,7 @@ global.IS_PRO = process.env.NODE_ENV === 'production';
   opt: {cdn, 
         clientVersion, 
         CORS, 
-        localunpkgdir?, 
-        localunpkgVersion?, X
+        localunpkgdir?
          _devlrClientJs?
       }
 */
