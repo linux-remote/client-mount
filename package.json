@@ -1,6 +1,6 @@
 {
   "name": "@linux-remote/client-mount",
-  "version": "4.0.6",
+  "version": "4.1.6",
   "description": "server mount client",
   "main": "index.js",
   "files": [

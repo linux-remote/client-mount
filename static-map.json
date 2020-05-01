@@ -1,7 +1,7 @@
 {
   "@hezedu/amd": "0.0.2",
   "@linux-remote/open-icon": "1.0.3",
-  "jquery": "3.4.1",
+  "jquery": "3.5.0",
   "pako": "1.0.10",
   "vue": "2.6.11",
   "vue-router": "3.0.1",
