@@ -43,7 +43,7 @@ function genDisted(v){
     { name: 'vue.runtime', mName: 'vue', file: 'vue.runtime' }, 
     'vuex',
     'vue-router', 
-    { name: 'amd', mName: '@hezedu/amd', suffix: '.min.js' },
+    { name: 'amd_ef', mName: 'amd_ef', suffix: '.min.js' },
     { name: 'pako', amd: true}
 
   ].forEach(v => {
