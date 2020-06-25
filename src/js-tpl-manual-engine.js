@@ -8,6 +8,7 @@ return `<!DOCTYPE html>
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     ` + (!data.lrClientCss ? '' : `<link href="${data.lrClientCss}" rel="stylesheet" />`) + `
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEAAQMAAABmvDolAAAABlBMVEUAAABiir2aiBlxAAAAAXRSTlMAQObYZgAAATpJREFUaN7t2UGKwzAMBVCHWXjpI+QoOVp0NB/FR8jSC2MNiG5moP+7qIW2yIsEwoOAP5YUkpSsAAH+gZruri1AgAABAgQI8DjIquP2TG0NBrQxMBlQYaAx0BmYDCgFwkBloDFwMdAZGG4w3UAdQDIDyYQAkCg4GNgZKJY3ANkNftxgC/BEIDALN8grICFQGNhVJwQHA6fqgEAxsG3oCOwElKU62dy1Whhwd5zBwOVui+JtzZ2BykBzv2L4Bwz/BFIBEJaFFJKm2LFAwA4WBCcDdrjZ0fOBYlfSuyupDxw0BDbbawewa6dl0AcsDDaB+EB5/QxjYfwBtyWrwMJgoCOQGLAwGJgQHAtAIdjtDkBZARWBzICFwcCFwLYCOgJWxyA4F8BEwMJ4r8/qAAECBAjw6eAdfoAG+BrwC50Ht6IgJiNlAAAAAElFTkSuQmCC" />
     <title>Linux Remote</title>
   </head>
   <body>
