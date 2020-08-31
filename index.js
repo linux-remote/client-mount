@@ -5,7 +5,6 @@
 const path = require('path');
 
 const { localUnpkgPrefix, 
-  DEF_CDN_DOMAIN, 
   CLIENT_PKG_NAME, 
   OPEN_ICON_PKG_NAME } = require('./src/constant.js');
 
@@ -32,7 +31,7 @@ function mount(app, eStatic, opt){
   let prefixUrl;
 
   if(opt.cdn){
-    prefixUrl = DEF_CDN_DOMAIN;
+    prefixUrl = opt.cdn;
   } else {
     _checkLocalUnpkg(opt);
     prefixUrl = localUnpkgPrefix;

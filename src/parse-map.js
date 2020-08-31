@@ -42,10 +42,9 @@ function genDisted(v){
     'jquery', 
     { name: 'vue.runtime', mName: 'vue', file: 'vue.runtime' }, 
     'vuex',
-    'vue-router', 
-    { name: 'amd_ef', mName: 'amd_ef', suffix: '.min.js' },
-    { name: 'pako', amd: true}
-
+    'vue-router',
+    { name: 'pako'},
+    { name: 'amd_ef', mName: 'amd_ef', suffix: '.min.js' }
   ].forEach(v => {
     // all in the dist folder: ...jquery\dist\jquery.js
     let name, file, mName, suffix, isAmd;
