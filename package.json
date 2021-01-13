@@ -1,6 +1,6 @@
 {
   "name": "@linux-remote/client-mount",
-  "version": "4.1.6",
+  "version": "4.7.0",
   "description": "server mount client",
   "main": "index.js",
   "files": [
@@ -9,6 +9,7 @@
     "src"
   ],
   "scripts": {
+    "p": "npm publish --access public",
     "publish": "node ../linux-remote/up-version-map.js"
   },
   "repository": {
