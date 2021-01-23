@@ -2,6 +2,8 @@
 // and ejs 1 was deprecated. 
 // So
 
+const browserCompltibleMinJs = /* B_C_M_START */ `!function(){function e(e){var r=window.navigator.userAgent,o=r.indexOf(e);if(-1!==o&&-1!==(o=(r=r.substr(o+e.length+1)).indexOf(".")))return r=r.substr(0,o+1),Number(r)}const r=[{mark:"Chrome",min:80},{mark:"Firefox",min:68}],o=r.length;let t,i,n,m,a=0,d=!1;for(;a<o;a++)if(t=r[a],i=e(t.mark),n="number"==typeof i,n){i<t.min?m="Browser version is too low, please upgrade to the latest.":d=!0;break}if(m||d||(m="For the time being, only Firefox and Chrome supported."),m)throw document.write("<h1>"+m+"</h1>"),m;document.write('<div id="lr-root">Loading...</div>')}();` /* B_C_M_END */;
+
 function jsTplManualEngine(data){
 return `<!DOCTYPE html>
 <html>
@@ -12,7 +14,7 @@ return `<!DOCTYPE html>
     <title>Linux Remote</title>
   </head>
   <body>
-    <script>!function(){var r={1:"For the time being, only Firefox and Chrome supported.",2:"Browser version is too low, please upgrade to the latest."};function e(r,e){if(null===e)return 1;if(r){if(e<80)return 2}else if(e<68)return 2}function n(r){var e=r.indexOf(".");return-1===e?Number(r):(e=r.substr(0,e),Number(e))}var t=function(t){var i,o=t.indexOf("Firefox");if(i=-1===o?-1===(o=t.indexOf("Chrome"))?1:e(!0,function(r,e){var t=r.substr(e+7);return(t=t.split(" ")).length>2?null:n(t[0])}(t,o)):e(!1,function(r,e){var t=r.substr(e+8);return(t=t.split(" ")).length>1?null:n(t[0])}(t,o)))return r[i]}(navigator.userAgent);if(t)throw document.write("<h1>"+t+"</h1>"),new Error(t);document.write('<div id="lr-root">Loading...</div>')}();</script>
+    <script>${browserCompltibleMinJs}</script>
     ` + (data.loadJsArr.map(function(src){
       return `<script src="${src}"></script>`
     }).join('\n    ')) + `
