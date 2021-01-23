@@ -7,7 +7,7 @@ const path = require('path');
 const { localUnpkgPrefix, 
   CLIENT_PKG_NAME, 
   OPEN_ICON_PKG_NAME } = require('./src/constant.js');
-
+const etagStartTime = 1611378647622; // 2021/1/23
 const parseMap = require('./src/parse-map.js');
 const {wrapDistedUrl} = require('./src/util.js');
 const indexRender = require('./src/index-render.js');
@@ -22,7 +22,6 @@ global.IS_PRO = process.env.NODE_ENV === 'production';
          _devlrClientJs?
       }
 */
-let indexHtmlChche;
 
 function mount(app, eStatic, opt){
   // mount index;
@@ -94,14 +93,13 @@ function mount(app, eStatic, opt){
 }
 
 function _indexHandler(opt, indexData){
-  let indexEtag;
+  let indexEtag = Date.now();
   if(global.IS_PRO){
-    indexEtag = opt.clientVersion;
-  } else {
-    indexEtag = 'dev_' + Date.now();
+    indexEtag = indexEtag - etagStartTime;
   }
+  let indexHtmlChche = indexRender(opt, indexData);
   indexEtag = `W/"${indexEtag}"`;
-  indexHtmlChche = indexRender(opt, indexData);
+  
   return function index(req, res){
     if(req.get('If-None-Match') === indexEtag){
       res.status(304).end();
